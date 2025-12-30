@@ -8,7 +8,8 @@ userRouter.get('/users', getUsers);
 userRouter.get('/users/:id', getUser);
 userRouter.post('/users', addUser);
 userRouter.delete('/users/:id', removeUser);
+// E0 
 userRouter.put('/users/:id', modifyUser);
-// TODO: userRouter.put for updating a user (extra)
+
 
 export { userRouter };
