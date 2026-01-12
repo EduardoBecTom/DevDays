@@ -1,11 +1,18 @@
 import { getAllUsers, getUserById, createUser, deleteUser, updateUser } from '../services/user.service.js';
+import { trace } from '@opentelemetry/api';
+
+const tracer = trace.getTracer('user-controller-tracer');
 
 export const getUsers = (req, res) => {
+    const span = tracer.startSpan('getUsers');
     try {
         const users = getAllUsers();
+        span.setAttribute('user.count', users.length);
         res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
+    }finally {
+        span.end();
     }
 };
 
@@ -58,4 +65,4 @@ export const modifyUser = (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
-}
+};
