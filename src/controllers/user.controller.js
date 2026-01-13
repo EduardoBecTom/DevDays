@@ -1,17 +1,18 @@
 import { getAllUsers, getUserById, createUser, deleteUser, updateUser } from '../services/user.service.js';
 import { trace } from '@opentelemetry/api';
+import { userCreationCounter } from '../otel.js';
 
 const tracer = trace.getTracer('user-controller-tracer');
 
-export const getUsers = (req, res) => {
+export const getUsers = async (req, res) => {
     const span = tracer.startSpan('getUsers');
     try {
-        const users = getAllUsers();
+        const users = await getAllUsers();
         span.setAttribute('user.count', users.length);
         res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
-    }finally {
+    } finally {
         span.end();
     }
 };
@@ -29,11 +30,11 @@ export const getUser = (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-
 export const addUser = (req, res) => {
     try {
         const newUser = createUser(req.body);
         res.status(201).json(newUser);
+        userCreationCounter.add(1);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }

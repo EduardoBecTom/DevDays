@@ -69,17 +69,15 @@ const meterProvider = new MeterProvider({
 // Registrar globalmente
 metrics.setGlobalMeterProvider(meterProvider);
 
-const meter = metrics.getMeter('user-controller-meter');
-const userCreationCounter = meter.createCounter('user_creation_count', {
+const userMeter = metrics.getMeter('user-controller-meter');
+export const userCreationCounter = userMeter.createCounter('user_creation_count', {
     description: 'Counts number of users created',
     unit: "users",
 });
-export const addUser = (req, res) => {
-    try {
-        const newUser = createUser(req.body);
-        res.status(201).json(newUser);
-        userCreationCounter.add(1);
-    } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
+
+const githubMeter = metrics.getMeter('github-meter');
+
+export const githubRequestDuration = githubMeter.createHistogram('github_api_request_duration', {
+    description: 'Distribución de la duración de las peticiones a la API de GitHub',
+    unit: 'ms',
+});

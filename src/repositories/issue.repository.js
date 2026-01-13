@@ -5,16 +5,22 @@ const findAll = async () => {
 };
 
 const findByIssueId = async (issueId) => {
-    return await Issue.findOne({ issueId });
+    return 
+    await Issue.findOne({ issueId });
 };
 
-const create = async (issueData) => {
+const create = async (issueData) => {  
     const issue = new Issue(issueData);
     return await issue.save();
+};
+
+const deleteAll = async () => {
+    return await Issue.deleteMany({});
 };
 
 export default {
     findAll,
     create,
     findByIssueId,
+    deleteAll,
 };

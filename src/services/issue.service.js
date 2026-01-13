@@ -1,5 +1,17 @@
 import axios from 'axios';
 import IssueRepository from '../repositories/issue.repository.js';
+import { githubRequestDuration } from '../otel.js';
+import { fetchAllPages } from './github.service.js';
+
+const githubClient = axios.create({
+    baseURL: 'https://api.github.com',
+    headers: {
+        'Authorization': `token ${process.env.GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'X-GitHub-Api-Version': '2022-11-28' // Especificado en la documentación
+    },
+    timeout: 5000
+});
 
 export const getAllIssues = async () => {
     return await IssueRepository.findAll();
@@ -10,8 +22,10 @@ export const getIssueByIssueId = async (issueId) => {
 };
 
 export const fetchGithubIssues = async (repoOwner, repoName) => {
-    const response = await axios.get(`https://api.github.com/repos/${repoOwner}/${repoName}/issues?state=all`);
-    return response.data;
+    const initialUrl = `/repos/${repoOwner}/${repoName}/issues?state=all&per_page=100`;
+    
+    const issues = await fetchAllPages(initialUrl);
+    return issues;
 };
 
 export const saveIssues = async (issues) => {
@@ -37,9 +51,14 @@ export const saveIssues = async (issues) => {
     return savedIssues;
 };
 
+export const clearAllIssues = async () => {
+    return await IssueRepository.deleteAll();
+};
+
 export default {
     getAllIssues,
     getIssueByIssueId,
     fetchGithubIssues,
-    saveIssues
+    saveIssues,
+    clearAllIssues,
 };
