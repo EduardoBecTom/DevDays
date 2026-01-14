@@ -1,17 +1,6 @@
-import axios from 'axios';
 import IssueRepository from '../repositories/issue.repository.js';
-import { githubRequestDuration } from '../otel.js';
 import { fetchAllPages } from './github.service.js';
 
-const githubClient = axios.create({
-    baseURL: 'https://api.github.com',
-    headers: {
-        'Authorization': `token ${process.env.GITHUB_TOKEN}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'X-GitHub-Api-Version': '2022-11-28' // Especificado en la documentación
-    },
-    timeout: 5000
-});
 
 export const getAllIssues = async () => {
     return await IssueRepository.findAll();

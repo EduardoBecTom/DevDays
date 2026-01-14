@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { githubRequestDuration } from '../otel.js';
 
 const headers = {
     'Accept': 'application/vnd.github.v3+json'

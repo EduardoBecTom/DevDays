@@ -75,9 +75,18 @@ export const userCreationCounter = userMeter.createCounter('user_creation_count'
     unit: "users",
 });
 
-const githubMeter = metrics.getMeter('github-meter');
 
-export const githubRequestDuration = githubMeter.createHistogram('github_api_request_duration', {
-    description: 'Distribución de la duración de las peticiones a la API de GitHub',
-    unit: 'ms',
+
+const systemMeter = metrics.getMeter('system-monitor');
+
+const ramGauge = systemMeter.createObservableGauge('process_ram_usage', {
+    description: 'Memoria RAM utilizada por el proceso de Node.js',
+    unit: 'MB',
+});
+
+ramGauge.addCallback((result) => {
+    const memoryInBytes = process.memoryUsage().heapUsed;
+    const memoryInMB = memoryInBytes / 1024 / 1024;
+    
+    result.observe(memoryInMB);
 });
