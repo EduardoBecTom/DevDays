@@ -14,11 +14,9 @@ Se prueba el endpoint usando un POST a `http://localhost:3002/api/v1/issues/fetc
     }
 }``` Y se comprueba la inmensa cantidad de issues recopiladas
 ## N1-2
-Al hacer el audit de las issues con POST `http://localhost:3002/api/v1/audits/issues` se vera en los logs del backend esta nueva metrica(gauge)
+En los logs del backend se muestra la nueva métrica de memoria
 ## N1-3
 Tener instalado [Ollama](https://ollama.com/), ejecutar en la terminal: `ollama pull llama3.2:1b`. probar el endpoint POST `http://localhost:3002/api/v1/ai/chat` con cuerpo: ```json {"prompt": "Hola, que modelo eres?"}
-## N1-4
-Acceder desde el navegador a `http://localhost:8080/audit` 
 ## N2-P2-A
 
 * endpoint POST  `http://localhost:3000/api/v1/audits/weather` ejecuta y almacena la auditoría de las últimas 4 semanas, Body: `city` 
