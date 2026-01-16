@@ -16,10 +16,11 @@ Se prueba el endpoint usando un POST a `http://localhost:3002/api/v1/issues/fetc
 ## N1-2
 En los logs del backend se muestra la nueva métrica de memoria
 ## N1-3
-Tener instalado [Ollama](https://ollama.com/), ejecutar en la terminal: `ollama pull llama3.2:1b`. probar el endpoint POST `http://localhost:3002/api/v1/ai/chat` con cuerpo: ```json {"prompt": "Hola, que modelo eres?"}
+Asegurarse de estar usando el ollama.service.js en el controller
+Tener instalado [Ollama](https://ollama.com/), ejecutar en la terminal: `ollama pull llama3.1:8b`. probar el endpoint POST `http://localhost:3002/api/v1/ai/chat` con cuerpo: ```json {"prompt": "Hola, que modelo eres?"}
 ## N2-P2-A
 
-* endpoint POST  `http://localhost:3002/api/v1/audits/weather` ejecuta y almacena la auditoría de las últimas 4 semanas, Body: `city` 
+* endpoint POST  `http://localhost:3002/api/v1/audits/weather` ejecuta y almacena la auditoría de las últimas 4 semanas, Body: {"city" = "Sevilla"}
 
 ## N2-P2-B
 POST	`http://localhost:3002/api/v1/ai/weather-audio`	genera y sirve un archivo de audio .mp3 con el resumen climático, que se podrá encontrar en la carpeta de audio_output, Body:
@@ -31,7 +32,7 @@ POST	`http://localhost:3002/api/v1/ai/weather-audio`	genera y sirve un archivo d
 
 ```
 ## N2-P2-C
-En Grafana, se ha configurado la fuente de datos (DataSource) apuntando a http://prometheus:9090. Utilizando un script de dashboard personalizado, que se importa del archivo /infrastructure/grafana/Dashboard.json
+En Grafana, se ha configurado la DataSource apuntando a http://prometheus:9090. Utilizando un script de dashboard personalizado, que se importa del archivo /infrastructure/grafana/Dashboard.json
 ## N2-Ex-1
 endpoint POST	`http://localhost:3002/api/v1/ai/uml`	Transforma un diagrama UML en texto plano a una estructura JSON organizada y validada.
 Body:
