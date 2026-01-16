@@ -14,6 +14,7 @@
   "type": "module",
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/exporter-prometheus": "^0.210.0",
     "@opentelemetry/instrumentation": "^0.208.0",
     "@opentelemetry/instrumentation-http": "^0.208.0",
     "@opentelemetry/resources": "^2.2.0",
@@ -28,7 +29,7 @@
     "express-validator": "^7.3.1",
     "mongoose": "^9.0.2",
     "openai": "^6.15.0",
-    "swagger-ui-express": "^5.0.1"
-  },
-  "devDependencies": {}
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.3.5"
+  }
 }

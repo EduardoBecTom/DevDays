@@ -7,7 +7,7 @@ const openai = new OpenAI({
 
 export const generateText = async (prompt) => {
     const response = await openai.responses.create({
-        model: 'deepseek-r1:1.5b',
+        model: 'llama3.1:8b',
         input: prompt,
     });
     return response.output_text;
