@@ -19,7 +19,7 @@ En los logs del backend se muestra la nueva métrica de memoria
 Tener instalado [Ollama](https://ollama.com/), ejecutar en la terminal: `ollama pull llama3.2:1b`. probar el endpoint POST `http://localhost:3002/api/v1/ai/chat` con cuerpo: ```json {"prompt": "Hola, que modelo eres?"}
 ## N2-P2-A
 
-* endpoint POST  `http://localhost:3000/api/v1/audits/weather` ejecuta y almacena la auditoría de las últimas 4 semanas, Body: `city` 
+* endpoint POST  `http://localhost:3002/api/v1/audits/weather` ejecuta y almacena la auditoría de las últimas 4 semanas, Body: `city` 
 
 ## N2-P2-B
 POST	`http://localhost:3002/api/v1/ai/weather-audio`	genera y sirve un archivo de audio .mp3 con el resumen climático, que se podrá encontrar en la carpeta de audio_output, Body:
